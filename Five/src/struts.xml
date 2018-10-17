@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+	<constant name="struts.devMode" value="false" /><!-- 开启debug调试 -->
+	<constant name="struts.custom.i18n.resources"
+		value="interName" /><!-- 基名 -->
+	<constant name="struts.multipart.maxSize" value="209715200" /><!-- 
+		限制上传文件大小 -->
+
+
+
+
+	<!-- 主包 -->
+	<package name="indexPack" namespace="/"
+		extends="struts-default">
+		<!-- 定义拦截器 -->
+		<interceptors>
+			<interceptor class="com.interceptor.InterceptorImpl"
+				name="myinter"></interceptor>
+		</interceptors>
+		<!-- 全局result -->
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		<!-- 下单 -->
+		<action name="order_*" class="com.action.OrderAction"
+			method="{1}">
+			<result>/myorder.jsp</result>
+			<result name="orderShow">/select.jsp</result>
+			<result name="input" type="chain">order_userOrder</result>
+			<interceptor-ref name="myinter">
+				<param name="excludeMethods">onlineOrder,selectOrderID</param><!-- 放行 -->
+				<param name="includeMethods">userOrder</param><!-- 拦截 -->
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<allowed-methods>onlineOrder,userOrder,selectOrderID</allowed-methods><!-- 
+				允许占位符调用的方法 -->
+
+		</action>
+		<!-- 地址 -->
+		<action name="add_*" class="com.action.AddressAction"
+			method="{1}">
+			<result>/myaddress.jsp</result>
+			<result name="input" type="chain">add_userAddressInfo</result>
+			<interceptor-ref name="myinter">
+				<param name="includeMethods">address,userAddressInfo</param><!-- 拦截 -->
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<!-- 允许占位符调用的方法 -->
+			<allowed-methods>address,userAddressInfo</allowed-methods>
+		</action>
+		<!-- 用户 -->
+		<action name="user_*" class="com.action.UserAction"
+			method="{1}">
+			<result>/index.jsp</result>
+			<result name="cnm" type="chain">user_selectone</result>
+			<result name="error">/login.jsp</result>
+			<result name="input">/loginsuccess.jsp</result>
+			<result name="getImg" type="stream">
+				<param name="inputName">inputStream</param>
+			</result>
+			<result name="pwdError">/pwdmod.jsp</result>
+			
+			<!-- 引用拦截器 -->
+			<interceptor-ref name="myinter">
+				<param name="excludeMethods">login,addUser</param><!-- 放行 -->
+				<param name="includeMethods"></param><!-- 拦截 -->
+			</interceptor-ref>
+			<interceptor-ref name="fileUpload">
+				<param name="allowedExtensions">jpg,png</param><!-- 限制上传文件类型 -->
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<!-- 允许占位符调用的方法 -->
+			<allowed-methods>selectone,addUser,login,updateinfo,showimg,updatePwd,clearOut</allowed-methods>
+		</action>
+	</package>
+	<!-- 请求json -->
+	<package name="jsoninf" namespace="/json"
+		extends="json-default,struts-default">
+		<action name="get_*" method="{1}"
+			class="com.service.JsonService">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+			<allowed-methods>addressJson</allowed-methods>
+		</action>
+	</package>
+
+</struts>

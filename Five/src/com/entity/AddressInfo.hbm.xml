@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-13 23:40:12 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.entity.AddressInfo" table="ADDRESSINFO">
+		<id name="addressID" type="java.lang.Integer" access="field">
+			<column name="ADDRESSID" />
+			<generator class="identity" />
+		</id>
+		<property name="pid" type="java.lang.Integer" access="field">
+			<column name="PID" />
+		</property>
+		<property name="addressMan" type="java.lang.String"
+			access="field">
+			<column name="ADDRESSMAN" />
+		</property>
+		<property name="addressPhone" type="java.lang.String"
+			access="field">
+			<column name="ADDRESSPHONE" />
+		</property>
+		<property name="addressName" type="java.lang.String"
+			access="field">
+			<column name="ADDRESSNAME" />
+		</property>
+	</class>
+</hibernate-mapping>

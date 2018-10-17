@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-11 14:04:01 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.entity.LogisticsInfo" table="LOGISTICSINFO">
+		<id name="ID" type="int">
+			<column name="ID" />
+			<generator class="identity" />
+		</id>
+		<property name="logNo" type="java.lang.Long">
+			<column name="LOGNO" />
+		</property>
+		<property name="inputName" type="java.lang.String">
+			<column name="INPUTNAME" />
+		</property>
+		<property name="inputPhone" type="java.lang.String">
+			<column name="INPUTPHONE" />
+		</property>
+		<property name="inputAdd" type="java.lang.String">
+			<column name="INPUTADD" />
+		</property>
+		<property name="noteInfo" type="java.lang.String">
+			<column name="NOTEINFO" />
+		</property>
+		<property name="outputName" type="java.lang.String">
+			<column name="OUTPUTNAME" />
+		</property>
+		<property name="outputPhone" type="java.lang.String">
+			<column name="OUTPUTPHONE" />
+		</property>
+		<property name="output" type="java.lang.String">
+			<column name="OUTPUT" />
+		</property>
+		<property name="outDate" type="java.lang.String">
+			<column name="OUTDATE" />
+		</property>
+
+	</class>
+</hibernate-mapping>

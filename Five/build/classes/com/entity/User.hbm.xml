@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-13 23:32:31 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.entity.User" table="USER">
+		<id name="userID" type="int">
+			<column name="USERID" />
+			<generator class="identity" />
+		</id>
+		<property name="userPhone" type="java.lang.String"
+			unique="true">
+			<column name="USERPHONE" />
+		</property>
+		<property name="userPWd" type="java.lang.String">
+			<column name="USERPWD" />
+		</property>
+		<property name="userPicture" type="java.lang.String">
+			<column name="USERPICTURE" />
+		</property>
+		<property name="userName" type="java.lang.String">
+			<column name="USERNAME" />
+		</property>
+		<property name="userSex" type="boolean">
+			<column name="USERSEX" />
+		</property>
+		<property name="UserBirth" type="java.lang.String">
+			<column name="USERBIRTH" />
+		</property>
+		<property name="UserEmail" type="java.lang.String">
+			<column name="USEREMAIL" />
+		</property>
+		<property name="UserAdd" type="java.lang.String">
+			<column name="USERADD" />
+		</property>
+		<set name="addLibar" table="ADDRESSINFO" inverse="true"
+			lazy="false" access="field">
+			<key>
+				<column name="PID" />
+			</key>
+			<one-to-many class="com.entity.AddressInfo" />
+		</set>
+	</class>
+</hibernate-mapping>
